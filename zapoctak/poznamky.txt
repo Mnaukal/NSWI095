@@ -1,0 +1,30 @@
+počty slov
+počty písmen
+
+
+ARGV
+1 char / word
+2 pocet (výchozí je 1)
+3 alfanumeric / all
+4 case / ignore
+
+
+-c char [default]
+-w word
+-n: počet
+-i ignoreCase
+-a pouze alfanumerické
+-s sort podle abecedy
+
+
+
+
+
+
+ cat test_pejsek_a_kocicka.txt | tr -dc [:alnum:] | ./letters_frequency.awk -v FS="" IGNORECASE=true | sort -n -r -k2
+ 
+ 
+  cat test_pejsek_a_kocicka.txt | tr -dc "[:alnum:] " | ./letters_frequency.awk -v IGNORECASE=true | sort -n -r -k2 | head -n 20
+  
+  
+  ./frequency.sh -i -a -s test_pejsek_a_kocicka.txt | head -n 10

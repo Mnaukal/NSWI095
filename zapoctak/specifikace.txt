@@ -1,0 +1,7 @@
+Napadlo mě vyrobit generátor náhodného textu ("Lorem Ipsum"). Generování by probíhalo metodou jednoduchých markovovských řetězců. Tedy každé další slovo by záviselo (pouze) na tom, jaké bylo poslední vygenerované slovo. 
+
+Program by měl umět vytvořit pravděpodobnostní tabulku slov - dvourozměrné pole toho, kolikrát je každá dvojice slov za sebou. To by snad mělo jít udělat pomocí awk. 
+
+A druhá funkce by byla z pravděpodobnostní tabulky vygenerovat text zadané délky - vybrat první slovo náhodně a následně vybrat další slovo náhodně (váženě podle tabulky - tedy nejpravděpodobnější by bylo to, které se ve zdrojovém textu po prvním slově vyskytovalo nejčastěji).
+
+ještě jsem dostal jeden nápad: frekvenční analýza textu. Cílem by bylo spočítat, kolikrát se v textu vyskytuje které písmeno (které je nejčastější atd), případně totéž pro dvojice (možná i více) po sobě jdoucích písmen. Dále by bylo zajímavé počítat totéž pro slova - kolikrát se každé slovo v textu vyskytuje. 
