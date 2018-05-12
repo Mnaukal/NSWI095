@@ -28,3 +28,8 @@ ARGV
   
   
   ./frequency.sh -i -a -s test_pejsek_a_kocicka.txt | head -n 10
+  
+  
+  
+  
+

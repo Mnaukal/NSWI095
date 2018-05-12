@@ -1,0 +1,24 @@
+NAME
+  frequency - frequency analysis of text
+
+SYNOPSIS
+  frequency [OPTION]... [FILE]...
+  
+DESCRIPTION
+  Character and word frequency analyzer. Count number of occurences for each character / word or a consecutive series of characters / words.
+
+  With no FILE, or when FILE is -, read standard input.
+
+  -c 
+    count characters (default)
+  -w
+    count words
+  -n [NUMBER]
+    number of characters / words to count (e.g. 2 means count pairs of characters)
+  -i
+    ignore case
+  -a
+    ignore all entries which aren't only alphanumeric characters. In character mode, it doesn't count commas, periods, etc. Doesn't make much sense in words mode, because it will also discard words like  "so,", "Hello!", etc. beacuse they contain comma or other special character. Better solution is to discard these characters even before using this script (for exaple with tr -dc "[:alnum:] ") 
+  -s
+    sort results alphabetically (default is by number of occurences)
+  

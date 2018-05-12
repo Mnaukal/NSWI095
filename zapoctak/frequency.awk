@@ -1,7 +1,8 @@
 #!/usr/bin/awk -f 
 
 BEGIN {
-
+  LAST=""
+  LOADED=0
 }
 
 {
@@ -9,11 +10,33 @@ BEGIN {
   {
     if(IGNORECASE)
       $i = tolower($i)
-    
-    #print $i " " "/"REGEX"/" " " ($i ~ REGEX)
       
-    if($i ~ REGEX)  
-      counts[$i]++;  
+    if($i !~ REGEX)
+      continue
+  
+    #print LAST $i
+    if(LAST == "")
+      LAST=$i
+    else
+      LAST=LAST FS $i
+    LOADED++
+    #print LAST
+  
+    if(LOADED < COUNT) {
+      print "continue - " LAST
+      continue  
+    }
+    else
+    {
+      counts[LAST]++;
+      
+      if (FS=="")
+        LAST=substr(LAST, 2)
+      else if (index(LAST, FS) == 0)
+        LAST=""
+      else
+        LAST=substr(LAST, index(LAST, FS) + 1)
+    }
   }  
 }
 
