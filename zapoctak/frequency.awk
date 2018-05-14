@@ -3,6 +3,7 @@
 BEGIN {
   LAST=""
   LOADED=0
+  TOTAL=0
 }
 
 {
@@ -28,7 +29,8 @@ BEGIN {
     }
     else
     {
-      counts[LAST]++;
+      counts[LAST]++
+      TOTAL++
       
       if (FS=="")
         LAST=substr(LAST, 2)
@@ -43,6 +45,6 @@ BEGIN {
 END {
   for (key in counts)
   {
-    print key ":\t" counts[key] "x"  
+    print key ":\t" counts[key] "x\t" counts[key]*100/TOTAL "%"  
   }  
 }
