@@ -1,0 +1,21 @@
+NAME
+  markov - text generation tool using markov chains
+
+SYNOPSIS
+  markov -t [OPTION]... [FILE]... >[TABLE_FILE] for generating probability table
+  markov [OPTION]... [TABLE_FILE] for generating text from table
+  
+DESCRIPTION
+  Tool for generating text using Markov chains method. This means that each new generated word depends only on last generated word (based of probability of occurence of this pair of words in source text)
+
+  With no FILE, or when FILE is -, read standard input.
+
+  -i 
+    ignore case
+  -n: 
+    number of words to generate (doesn't do anything in table generating mode)
+  -t 
+    generate probability table
+  -a
+    posibility to generate all words. This is done by increasing probability of all words (even those pairs which were not present in the source text).   
+  

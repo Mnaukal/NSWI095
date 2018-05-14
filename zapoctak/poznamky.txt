@@ -16,9 +16,17 @@ ARGV
 -a pouze alfanumerické
 -s sort podle abecedy
 
+%  výskytu
 
 
 
+Markov
+
+-i ignorecase
+-w word [default]
+-n: count
+-t probability table
+-a increase all
 
 
  cat test_pejsek_a_kocicka.txt | tr -dc [:alnum:] | ./letters_frequency.awk -v FS="" IGNORECASE=true | sort -n -r -k2
@@ -30,6 +38,5 @@ ARGV
   ./frequency.sh -i -a -s test_pejsek_a_kocicka.txt | head -n 10
   
   
-  
-  
+lipsum.com
 

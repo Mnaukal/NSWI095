@@ -24,7 +24,7 @@ BEGIN {
     #print LAST
   
     if(LOADED < COUNT) {
-      print "continue - " LAST
+      #print "continue - " LAST
       continue  
     }
     else

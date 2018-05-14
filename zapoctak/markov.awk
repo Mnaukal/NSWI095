@@ -18,9 +18,14 @@ BEGIN {
 }
 
 END {
-  #print "end " CURRENT
-  FIRST_NUM = int(rand() * CURRENT)
-  #print FIRST_NUM
+  if(INCREASE)
+  {
+    for (i in counts)
+      for (j in counts[i])
+        counts[i][j] = (counts[i][j] + 1 / CURRENT) / 2 # increase all probabilities
+  }
+
+  FIRST_NUM = int(rand() * CURRENT) + 1
   printf "%s%s", words[FIRST_NUM], OFS
   LAST_NUM = FIRST_NUM
   
@@ -41,8 +46,8 @@ function Next(last)
   
   while (probability_sum <= random)
 	{
-		probability_sum += counts[last][current_index]
-		current_index++
+  	current_index++ 
+  	probability_sum = probability_sum + counts[last][current_index]
   }
   return current_index
 }

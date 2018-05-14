@@ -5,16 +5,14 @@ B='GENERATE=100'
 C="IGNORECASE=false"
 TABLE=false
 
-while getopts :wn:it arg; do
+while getopts :n:ita arg; do
   case $arg in
-    #c ) A='FS=""';
-    #    D='-v OFS=""';;
-    w ) A="FS=' '";;
     n ) if echo $OPTARG | grep -q "^[0-9][0-9]*$"; then
           B="GENERATE=$OPTARG";
         else echo "Wrong value for option -n: $OPTARG"; exit;
         fi;;
-    i ) D="IGNORECASE=true";;
+    i ) C="IGNORECASE=true";;
+    a ) E="-v INCREASE=true";;
     t ) TABLE=true;;    
     \? ) echo "Unknown option: $OPTARG"; exit;;
     : ) echo "Missing value for option $OPTARG"; exit;; 
@@ -30,5 +28,5 @@ if [ $TABLE = true ]; then
   cat $@ | eval ./markov_gen.awk -v $A -v $C
 else
   #echo "generate"
-  cat $@ | eval ./markov.awk -v $B $D
+  cat $@ | eval ./markov.awk -v $B $E
 fi
