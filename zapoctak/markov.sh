@@ -29,4 +29,5 @@ if [ $TABLE = true ]; then
 else
   #echo "generate"
   cat $@ | eval ./markov.awk -v $B $E
+    # possible extension: user can input first word of the generated text (RANDOM=0)
 fi

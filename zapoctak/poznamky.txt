@@ -40,3 +40,6 @@ Markov
   
 lipsum.com
 
+
+Vybrat si první slovo (a pak taky když neumí generovat). Jinak když nejsou data, tak náhodně 
+

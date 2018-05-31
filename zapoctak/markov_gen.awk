@@ -24,7 +24,9 @@ BEGIN {
   }  
 }
 
-END {
+END { 
+  sums[LAST] = sums[LAST] > 0 ? sums[LAST] : 0
+
   n=asorti(sums, words) # sort all words occured in text
   for (i = 1; i <= n; i++) {
     WORD = words[i] # current word  

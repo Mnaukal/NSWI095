@@ -2,6 +2,7 @@
 
 BEGIN {
   CURRENT=0
+  RANDOM=1
   srand()              
 }
 
@@ -9,8 +10,9 @@ BEGIN {
   #print $1 " " $NF
   CURRENT++
   WORD = $1
-  sums[WORD] = $NF
+  sums[CURRENT] = $NF
   words[CURRENT] = WORD
+  if($NF != 0)
   for (i = 2; i <= NF - 1; i++)
   {
     counts[CURRENT][i - 1] = $i / $NF
@@ -25,9 +27,17 @@ END {
         counts[i][j] = (counts[i][j] + 1 / CURRENT) / 2 # increase all probabilities
   }
 
-  FIRST_NUM = int(rand() * CURRENT) + 1
-  printf "%s%s", words[FIRST_NUM], OFS
-  LAST_NUM = FIRST_NUM
+  if(RANDOM)
+  {
+    FIRST_NUM = int(rand() * CURRENT) + 1
+    printf "%s%s", words[FIRST_NUM], OFS
+    LAST_NUM = FIRST_NUM
+  }
+  else
+  {
+    # possible extension: user can input first word of the generated text
+  }
+  
   
   for (i = 0; i < GENERATE; i++)
   {
@@ -40,6 +50,16 @@ END {
 
 function Next(last)
 {  
+  if(sums[last] == 0) # no data for this word
+  {
+    if(RANDOM)
+      return int(rand() * CURRENT) + 1
+    else
+    {
+      # possible extension: user can input next word of the generated text if no data are available
+    }
+  }
+
   random=rand()
   current_index=0
   probability_sum=0
