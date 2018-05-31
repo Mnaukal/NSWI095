@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 rand_port() {
 	local x
@@ -92,7 +92,7 @@ serve() {
 	while read line; do
 		parse "$line"
 
-		case "$CMD" in
+		case `upper $CMD` in
 			USER)
 				if [ "$ARG" == "$user" ]; then
 					echo "331 Any password will do"
@@ -150,7 +150,7 @@ serve() {
 				;;
 			LIST)
 				if [ $nc_pid -eq 0 ]; then
-					echo "425 Use PORT or PASV first"
+					echo "425 Use PORT or PASV (EPSV) first"
 				else
 					echo "150 Here comes the directory listing"
 					ls -al | tail -n +2 >&4
@@ -163,6 +163,24 @@ serve() {
 					nc_pid=0
 				fi
 				;;
+      RETR)
+				if [ $nc_pid -eq 0 ]; then
+					echo "425 Use PORT or PASV (EPSV) first"
+				else
+					echo "150 Sending file"
+					if cat $ARG >&4 2>/dev/null; then
+            echo "226 File send OK"
+          else
+            echo "451 File not found"
+          fi
+					exec 3<&- 4>&-
+					rm "$FIFO_IN" "$FIFO_OUT"
+					port=0
+					kill $nc_pid
+					wait $nc_pid
+					nc_pid=0
+				fi
+				;;        
 			QUIT)
 				echo "221 Goodbye."
 				return 0
@@ -177,8 +195,7 @@ serve() {
 }
 
 
-#set -x
-if [ "$1" = "--serve" ]; then
+if [ "$1" == "--serve" ]; then
 	serve
 	exit $?
 fi
